@@ -1,0 +1,111 @@
+<div class="container">
+    <!-- <h1 class="title">
+    {{ 'PAGES.HOME.TITLE' | translate }}
+  </h1> -->
+    <!-- <h3>Liste des clients</h3> -->
+
+    <div class="ui-g">
+        <!-- <div class="ui-g-12 ui-md-2">Informations</div> -->
+        <div class="ui-g-12 ui-md-12 ui-g-nopad">
+            <div class="ui-g-12">
+                Liste des clients
+            </div>
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-12">
+                        <p-dataView #dv [value]="cars" [paginator]="true" [rows]="10" layout="grid"
+                            paginatorPosition="both" filterBy="LastName" [sortField]="sortField" [sortOrder]="sortOrder">
+                            <p-header>
+                                <div class="ui-helper-clearfix">
+                                    <div class="ui-g">
+                                        <div class="ui-g-12 ui-md-4">
+                                            <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey"
+                                                placeholder="Trier par" (onChange)="onSortChange($event)"
+                                                [style]="{'min-width':'140px'}"></p-dropdown>
+                                        </div>
+                                        <div class="ui-g-6 ui-md-4 filter-container">
+                                            <div style="position:relative">
+                                                <input type="search" pInputText placeholder="Rechercher par nom"
+                                                    (keyup)="dv.filter($event.target.value)">
+                                            </div>
+                                        </div>
+                                        <div class="ui-g-6 ui-md-4" style="text-align:right">
+                                            <!-- <p-dataViewLayoutOptions></p-dataViewLayoutOptions> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-header>
+                            <ng-template let-car pTemplate="listItem">
+                                <div class="ui-g-12">
+                                    <div class="car-details">
+                                        <div>
+                                            <!-- <img src="assets/imgs/car/{{car.brand}}.png"> -->
+                                            <div class="ui-g">
+                                                <div class="ui-g-12">Vin: <b>{{car.LastName}}</b></div>
+                                                <div class="ui-g-12">Year: <b>{{car.FirstName}}</b></div>
+                                                <div class="ui-g-12">Brand: <b>{{car.Birthday}}</b></div>
+                                                <div class="ui-g-12">Color: <b>{{car.CustomerID}}</b></div>
+                                            </div>
+                                            <button pButton type="button" icon="pi pi-search"
+                                                (click)="selectCar($event, car)"></button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-car pTemplate="gridItem">
+                                <div style="padding:.5em" class="ui-g-12 ui-md-3">
+                                    <p-panel [header]="car.CustomerID" [style]="{'text-align':'center'}">
+                                        <img src="assets/imgs/avatars/man.png" width="60">
+                                        <div class="car-detail">{{car.LastName}} - {{car.FirstName}}</div>
+                                        <hr class="ui-widget-content" style="border-top:0">
+                                        <button pButton type="button" icon="pi pi-search"
+                                            (click)="selectCar($event, car)" style="margin-top:0"></button>
+                                    </p-panel>
+                                </div>
+                            </ng-template>
+                        </p-dataView>
+
+                        <p-dialog header="Détails du client" [(visible)]="displayDialog" [responsive]="true"
+                            showEffect="fade" [modal]="true" [style]="{width: '225px'}" (onAfterHide)="onDialogHide()">
+                            <div class="ui-g" *ngIf="selectedCar">
+                                <div class="ui-g-12" style="text-align:center">
+                                    <img src="assets/imgs/avatars/man.png" width="120">
+                                </div>
+                                <div class="ui-g-4">Vin: </div>
+                                <div class="ui-g-8">{{selectedCar.CustomerID}}</div>
+
+                                <div class="ui-g-4">Brand: </div>
+                                <div class="ui-g-8">{{selectedCar.LastName}}</div>
+
+                                <div class="ui-g-4">Year: </div>
+                                <div class="ui-g-8">{{selectedCar.FirstName}}</div>
+
+                                <div class="ui-g-4">Color: </div>
+                                <div class="ui-g-8">{{selectedCar.Birthday}}</div>
+                            </div>
+                            <button pButton type="button" icon="pi pi-file" (click)="createPDF()"></button>Voir la dernière facture
+                        </p-dialog>
+                    </div>
+                    <!-- <div class="ui-g-12 ui-md-4">Maecenas vel nisi aliquet, vulputate tortor id, laoreet massa. Maecenas mattis tristique bibendum. Suspendisse vel mi dictum, vestibulum lacus quis, pulvinar quam. Proin vulputate, nibh at finibus varius, leo eros lacinia elit, nec blandit odio tellus a justo. Donec nec ex auctor, tristique nulla nec, rutrum sapien.</div> -->
+                    <!-- <div class="ui-g-12 ui-md-4">Proin efficitur in leo eget ornare. Nam vestibulum neque sed velit sagittis sodales. Sed scelerisque hendrerit magna a hendrerit. Cras tempor sem at justo pharetra convallis. Curabitur vel sodales purus. Vestibulum interdum facilisis nulla imperdiet suscipit. Quisque lectus felis, condimentum eget hendrerit sit amet.</div> -->
+                </div>
+
+                <!-- <div class="ui-g">
+                <div class="ui-g-6 ui-md-3"><img src="../../assets/imgs/galleria3.jpg" style="width:100%"></div>  
+                <div class="ui-g-6 ui-md-3"><img src="../../assets/imgs/galleria3.jpg" style="width:100%"></div> 
+                <div class="ui-g-6 ui-md-3"><img src="../../assets/imgs/galleria3.jpg" style="width:100%"></div>    
+                <div class="ui-g-6 ui-md-3"><img src="../../assets/imgs/galleria3.jpg" style="width:100%"></div>      
+            </div>
+            
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet sapien facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales finibus. Pellentesque neque orci, ullamcorper vitae ligula quis, dignissim euismod augue.</div>
+                <div class="ui-g-12 ui-md-6">Fusce ullamcorper congue massa, eget ullamcorper nunc lobortis egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dui eget dolor feugiat dapibus. Aliquam pretium leo et egestas luctus. Nunc facilisis gravida tellus.</div>
+            </div> -->
+            </div>
+        </div>
+        <!-- <div class="ui-g-12 footer">
+        Footer
+    </div> -->
+    </div>
+</div>

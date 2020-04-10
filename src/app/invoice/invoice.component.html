@@ -1,0 +1,160 @@
+<div class="container">
+    <!-- <h1 class="title">
+    {{ 'PAGES.HOME.TITLE' | translate }}
+  </h1> -->
+    <!-- <h3>Liste des clients</h3> -->
+
+    <div class="ui-g custom-margin">
+        <div class="ui-g-12 ui-md-6 white custom-border">
+            <p-scrollPanel [style]="{width: '100%', height: '600px'}">
+                <h3 class="first">Informations</h3>
+                <div class="ui-g">
+                    <div class="ui-g-2">
+                        <span class="first">Client : </span>
+                    </div>
+                    <div class="ui-g-10">
+                        <span> {{invoice.Customer?.LastName}} {{invoice.Customer?.FirstName}}</span>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-4">
+                        <span class="first">Type de document : </span>
+                    </div>
+                    <div class="ui-g-8">
+                        <span *ngIf="selectedType == 'Estimate'">Devis</span>
+                        <span *ngIf="selectedType == 'Invoice'">Facture</span>
+                    </div>
+                </div>
+                <p-table [columns]="cols" [value]="values">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td>
+                                {{rowData.Designation}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{rowData.Quantity}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{rowData.Unit.Name}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{rowData.Amount}}
+                            </td>
+                            <td style="text-align: center;">
+                                {{rowData.TotalAmount}}
+                            </td>
+                            <td style="text-align: center;">
+                                <p-button icon="pi pi-times" class="ui-button-danger" (onClick)="delete(rowData)">
+                                </p-button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="6">
+                                Aucune lignes de facture
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <div class="ui-g-12">
+                    <h3 class="first">Total : {{totalAmount}} €</h3>
+                </div>
+                <div class="ui-g-12">
+                    <button  pButton type="button" icon="pi pi-save"
+                        (click)="saveInvoice()" label="Sauvegarder"></button>
+                    <button *ngIf="selectedType == 'Estimate'" pButton type="button" icon="pi pi-file"
+                        (click)="createPDF()" label="Générer le devis"></button>
+                    <button *ngIf="selectedType == 'Invoice'" pButton type="button" icon="pi pi-file"
+                        (click)="createPDF()" label="Générer la facture"></button>
+                </div>
+            </p-scrollPanel>
+        </div>
+        <div class="ui-g-12 ui-md-6 ui-g-nopad white">
+            <div class="ui-g-12">
+                <h3 class="first">Type de document</h3>
+                <p-selectButton [options]="types" [(ngModel)]="selectedType"></p-selectButton>
+            </div>
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <h3 class="first">Ajouter un service ou matériau</h3>
+                        <div class="ui-g ui-fluid">
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <input type="text" pInputText placeholder="Désignation"
+                                        [(ngModel)]="workline.Designation">
+                                    <span class="ui-inputgroup-addon">Abc</span>
+                                </div>
+                            </div>
+
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <input type="number" pInputText placeholder="Prix" [(ngModel)]="workline.Amount">
+                                    <span class="ui-inputgroup-addon">€</span>
+                                </div>
+                            </div>
+
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <input type="number" pInputText placeholder="Quantité"
+                                        [(ngModel)]="workline.Quantity">
+                                    <span class="ui-inputgroup-addon">123</span>
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-md-4">
+                                <div class="ui-inputgroup">
+                                    <p-dropdown [options]="unit" [(ngModel)]="selectedUnit" placeholder="Unité"
+                                        optionLabel="Name" [showClear]="true"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="ui-g-12 ui-md-12">
+                                <p-listbox [options]="customer" [(ngModel)]="selectedCustomer" checkbox="checkbox"
+                                    filter="filter" optionLabel="LastName" [listStyle]="{'max-height':'250px'}"
+                                    (onChange)="onChangeCustomer($event)" (onClick)="onChangeCustomer($event)">
+                                    <p-header>
+                                        <i class="fa fa-users"></i>
+                                        Clients
+                                    </p-header>
+                                </p-listbox>
+                            </div>
+                            <div class="ui-g-12">
+                                <button pButton type="button" label="Ajouter" (click)="addWorkline($event)"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="ui-g">
+                <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div>  
+                <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div> 
+                <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div>    
+                <div class="ui-g-6 ui-md-3"><img src="assets/showcase/images/demo/galleria/galleria1.jpg" style="width:100%"></div>      
+            </div> -->
+
+                <!-- <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6">Phasellus faucibus purus volutpat mauris lacinia sodales. Ut sit amet
+                        sapien facilisis, commodo dui non, fringilla tellus. Quisque tempus facilisis nisi sodales
+                        finibus. Pellentesque neque orci, ullamcorper vitae ligula quis, dignissim euismod augue.</div>
+                    <div class="ui-g-12 ui-md-6">Fusce ullamcorper congue massa, eget ullamcorper nunc lobortis egestas.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices dui eget dolor feugiat
+                        dapibus. Aliquam pretium leo et egestas luctus. Nunc facilisis gravida tellus.</div>
+                </div> -->
+            </div>
+
+        </div>
+        <!-- <div class="ui-g-12">
+        Footer
+    </div> -->
+    </div>
+</div>

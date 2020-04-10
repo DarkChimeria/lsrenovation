@@ -1,0 +1,19 @@
+{
+    "Thermostat": {
+      "Netatmo": {
+        "CLIENT_ID": "",
+        "CLIENT_SECRET": "",
+        "USERNAME": "",
+        "PASSWORD": ""
+      }
+    },
+    "API":{
+        "Netatmo":"",
+        "Weather": "https://www.prevision-meteo.ch/services/json/reuilly-36",
+        "LSAPI": "http://localhost:3000/"
+    },
+    "DEV":{
+      "username":"ant",
+      "password": "123456"
+  }
+  }
