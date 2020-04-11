@@ -1,4 +1,4 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, Menu } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
@@ -38,7 +38,10 @@ function createWindow() {
   if (serve) {
     win.webContents.openDevTools();
   }
-  win.setMenu(null);
+  // win.setMenu(null);
+  // win.removeMenu();
+  // Permet de masquer le menu de base de l'application en passant à null
+  Menu.setApplicationMenu(null);
 
   // Emitted when the window is closed.
   win.on('closed', () => {

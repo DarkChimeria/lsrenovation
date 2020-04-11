@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-const API = 'http://localhost:3000/';
+const API = 'http://vps816559.ovh.net:3000/';
 import { Customer } from './customer';
 
 @Injectable()

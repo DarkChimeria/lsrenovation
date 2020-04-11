@@ -1,16 +1,84 @@
-<div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
-  <h3 class="first">Button Component</h3>
-  <p-button label="Click"></p-button>
-  <p-button icon="pi pi-check" label="Click"></p-button>
-  <p-button icon="pi pi-check" iconPos="right" label="Click"></p-button>
-  <p-button icon="pi pi-check"></p-button>
-  <p-button icon="pi pi-check" [disabled]="true" label="Disabled"></p-button>
-  <div class="ui-g">
-    <div class="ui-g-4">Col1</div>
-    <div class="ui-g-4">Col2</div>
-    <div class="ui-g-4">Col3</div>
-</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm">
+      <div class="tile job">
+        <div class="header">
+          <div class="count">1</div>
+          <div class="title">Paiement</div>
+        </div>
+        <div class="body">
+          <div class="title">Paiements effectuées</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="tile job">
+        <div class="header">
+          <div class="count">4</div>
+          <div class="title">Relances</div>
+        </div>
+        <div class="body">
+          <div class="title">Paiements en attente</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="tile wide resource">
+        <div class="header">
+          <div class="left">
+            <div class="count">30</div>
+            <div class="title">Clients</div>
+          </div>
+          <div class="right">
+            <div class="count">10</div>
+            <div class="title">Sociétés</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="title">Clientelle</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="tile wide quote">
+        <div class="header">
+          <div class="left">
+            <div class="count">2</div>
+            <div class="title">Devis</div>
+          </div>
+          <div class="right">
+            <div class="count">2450€</div>
+            <div class="title">Total</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="title">Devis en attente</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="tile wide invoice">
+        <div class="header">
+          <div class="left">
+            <div class="count">6</div>
+            <div class="title">Factures</div>
+          </div>
+          <div class="right">
+            <div class="count">4876€</div>
+            <div class="title">Total</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="title">Factures effectuées</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="chartLS">
+          <p-chart type="bar" [data]="data" width="auto" height="500px"></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Application pour l'entreprise LS Rénovation",
   "homepage": "https://github.com/maximegris/angular-electron",
+  "repository": "https://github.com/DarkChimeria/lsrenovation",
   "author": {
     "name": "Anthony SLIMANI",
     "email": "anthonyslimani@orange.fr"
@@ -92,8 +93,11 @@
     "@angular/animations": "^8.2.13",
     "@angular/cdk": "^8.2.3",
     "@fortawesome/angular-fontawesome": "^0.5.0",
+    "chart.js": "^2.9.3",
     "config": "^3.2.3",
+    "electron-log": "^4.1.1",
     "electron-node-config": "^1.1.0",
+    "electron-updater": "^4.2.5",
     "fontawesome": "^5.6.3",
     "pdfmake": "^0.1.62",
     "primeicons": "^2.0.0",

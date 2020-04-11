@@ -32,17 +32,11 @@ export class AppComponent {
   ngOnInit() {
     this.items = [
       {
-        label: 'Fichier',
-        items: [{
-          label: 'New',
-          icon: 'pi pi-fw pi-plus',
-          items: [
-            { label: 'Project' },
-            { label: 'Other' },
-          ]
-        },
-        { label: 'Open' },
-        { label: 'Quit' }
+        label: 'Accueil',
+        items: [
+          { label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/home'] },
+          { label: 'Paramètres', icon: 'pi pi-fw pi-cog', routerLink: ['/customer'] },
+          { label: 'Fermer' , icon: 'pi pi-fw pi-times', routerLink: ['/customer'] }
         ]
       },
       {
@@ -58,8 +52,8 @@ export class AppComponent {
         label: 'Devis/Factures',
         icon: 'pi pi-fw pi-money-bill',
         items: [
-          { label: 'Créer', icon: 'pi pi-fw pi-plus' , routerLink: ['/invoice'] },
-          { label: 'Liste', icon: 'pi pi-fw pi-table' , routerLink: ['/invoiceList'] },
+          { label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['/invoice'] },
+          { label: 'Liste', icon: 'pi pi-fw pi-table', routerLink: ['/invoiceList'] },
           { label: 'Delete', icon: 'pi pi-fw pi-trash' },
           { label: 'Refresh', icon: 'pi pi-fw pi-refresh' }
         ]

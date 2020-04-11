@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const API = 'http://localhost:3000/';
+const API = 'http://vps816559.ovh.net:3000/';
 import { Invoice } from '../entities/invoice';
 import { Customer } from '../customer/customer';
+import { Unit } from '../entities/unit';
 
 @Injectable()
 // const options = {
@@ -37,13 +38,17 @@ export class InvoiceService {
       .then(res => <Customer[]>res)
       .then(data => data);
   }
-
+  getAllTypeOfQuantity() {
+    return this.http.get<any>(API + 'invoice/typeofquantity', this.httpOptions)
+      .toPromise()
+      .then(res => <Unit[]>res)
+      .then(data => data);
+  }
   saveInvoice(invoice: Invoice) {
     const body = JSON.stringify({
-      invoice: invoice,
-      password: 'totopsw',
+      invoice: invoice
     });
-    return this.http.post<any>(API + 'customer/saveInvoice', body, this.httpOptions)
+    return this.http.post<any>(API + 'invoice/save', body, this.httpOptions)
       .toPromise()
       .then(res => <Invoice>res)
       .then(data => data);

@@ -8,10 +8,11 @@ import { SharedModule } from '../shared/shared.module';
 
 import { TableModule } from 'primeng/table';
 
-import {ButtonModule} from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [CommonModule, SharedModule, HomeRoutingModule, TableModule, ButtonModule]
+  imports: [CommonModule, SharedModule, HomeRoutingModule, TableModule, ButtonModule, ChartModule]
 })
 export class HomeModule { }

@@ -9,6 +9,7 @@ import { Unit } from '../entities/unit';
 import { Customer } from '../customer/customer';
 import { CustomerComponent } from '../customer/customer.component';
 import { Item } from 'electron';
+import { CustomerService } from '../customer/customer.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -46,7 +47,7 @@ export class InvoiceComponent implements OnInit {
     selectedCustomer: Customer;
     invoice: Invoice;
     actions: any[];
-    constructor(private customerService: InvoiceService, private invoiceService: InvoiceService) {
+    constructor(private invoiceService: InvoiceService, private customerService: CustomerService) {
         this.types = [
             { label: 'Devis', value: 'Estimate', icon: 'fa fa-calculator' },
             { label: 'Facture', value: 'Invoice', icon: 'fa fa-eur' }
@@ -58,11 +59,13 @@ export class InvoiceComponent implements OnInit {
             { field: 'Amount', header: 'Prix U HT' },
             { field: 'TotalAmount', header: 'Total' }
         ];
-        this.unit = [
-            { Name: 'M2', Code: 'm2' },
-            { Name: 'ML', Code: 'ml' },
-            { Name: 'U', Code: 'u' }
-        ];
+        this.invoiceService.getAllTypeOfQuantity().then(type => this.unit = type);
+
+        // this.unit = [
+        //     { Name: 'M2', Code: 'm2' },
+        //     { Name: 'ML', Code: 'ml' },
+        //     { Name: 'U', Code: 'u' }
+        // ];
     }
 
     ngOnInit() {
@@ -184,9 +187,11 @@ export class InvoiceComponent implements OnInit {
         this.invoice.TotalAmount = this.totalAmount;
         this.invoice.Customer = this.selectedCustomer;
         this.invoice.Workline = this.values;
-        this.invoiceService.saveInvoice(this.invoice).then(data =>
-            this.invoice.InvoiceID = data.InvoiceID
-        );
+        this.invoiceService.saveInvoice(this.invoice).then((data) => {
+            this.invoice.InvoiceID = data.InvoiceID;
+            this.values = [...data.Workline];
+            this.invoice.Workline = data.Workline;
+        });
     }
 
     createPDF() {
