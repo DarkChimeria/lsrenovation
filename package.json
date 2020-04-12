@@ -1,12 +1,9 @@
 {
   "name": "lsrenovation",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Application pour l'entreprise LS Rénovation",
-  "homepage": "https://github.com/maximegris/angular-electron",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/DarkChimeria/lsrenovation.git"
-  },
+  "homepage": "https://github.com/DarkChimeria/lsrenovation",
+  "repository": "https://github.com/DarkChimeria/lsrenovation.git",
   "author": {
     "name": "Anthony SLIMANI",
     "email": "anthonyslimani@orange.fr"
@@ -41,9 +38,7 @@
     "lint": "ng lint",
     "prod": "npm run build:prod && electron-packager . lsrenovation --overwrite --asar=true --platform=win32 --arch=x64 --icon=assets/icons/win/favicon.ico --prune=true --out=Output/release-prod-builds --ignore=^/.svn --ignore=^/.vscode  --ignore=^/release-build --ignore=^/Output --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Deploy\"",
     "installerprod": "node installers/windows/prod/createinstaller.js",
-    "bestbuild": "npm run build && npm run prod && npm run installerprod",
-    "buildUpdate": "electron-builder build --win --publish never",
-    "deploy": "electron-builder build  --win --publish always"
+    "bestbuild": "npm run build && npm run prod && npm run installerprod"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "8.2.0",
