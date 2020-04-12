@@ -1,6 +1,7 @@
-import { app, BrowserWindow, screen, Menu } from 'electron';
+import { app, BrowserWindow, screen, Menu, ipcMain } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+const { autoUpdater } = require('electron-updater');
 
 let win, serve;
 const args = process.argv.slice(1);
@@ -81,3 +82,21 @@ try {
   // Catch Error
   // throw e;
 }
+win.once('ready-to-show', () => {
+  autoUpdater.checkForUpdatesAndNotify();
+});
+
+autoUpdater.on('update-available', () => {
+  win.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+  win.webContents.send('update_downloaded');
+});
+
+ipcMain.on('app_version', (event) => {
+  event.sender.send('app_version', { version: app.getVersion() });
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
